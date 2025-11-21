@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import fs from "node:fs";
 import path from "node:path";
 
@@ -6,7 +6,7 @@ export async function POST(req: NextRequest) {
   const body = await req.json();
   const prompt = (body?.prompt ?? "").toString();
   const targetFormat = (body?.target_format ?? "mermaid").toString();
-  const model = (body?.model ?? process.env.DEFAULT_MODEL ?? "openai/gpt-4o-mini").toString();
+  const model = (body?.model ?? process.env.DEFAULT_MODEL ?? "google/gemini-3-pro-preview").toString();
 
   const defaultBase = "https://openrouter.ai/api/v1";
   const baseUrl = process.env.GATEWAY_BASE_URL || defaultBase;
@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
         "X-Title": "vibedraw-nextjs-example",
       },
       body: JSON.stringify({
-        model: model || "openai/gpt-4o-mini",
+        model: model || "google/gemini-3-pro-preview",
         messages: [
           { role: "system", content: `你是图形绘制助手。仅返回${safeFormat}代码，不要任何解释。` },
           { role: "user", content: clippedPrompt },

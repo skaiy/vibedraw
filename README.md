@@ -45,7 +45,7 @@ To enable AI features, you need to configure the LLM gateway settings in your en
 ```env
 GATEWAY_BASE_URL=http://localhost:4000
 GATEWAY_API_KEY=your_gateway_key
-DEFAULT_MODEL=gemini-1.5-pro
+DEFAULT_MODEL=gemini-3-pro-preview
 ```
 
 ## Roadmap
