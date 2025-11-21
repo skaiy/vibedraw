@@ -1,22 +1,22 @@
 "use client";
-import * as excalidrawLib from "@excalidraw/excalidraw";
-import { Excalidraw } from "@excalidraw/excalidraw";
-
+import { Excalidraw, DefaultSidebar } from "@excalidraw/excalidraw";
+import GenerateSidebar from "./components/GenerateSidebar";
+import { useState } from "react";
 import "@excalidraw/excalidraw/index.css";
 
-import App from "../../with-script-in-browser/components/ExampleApp";
-
 const ExcalidrawWrapper: React.FC = () => {
+  const [excalidrawAPI, setExcalidrawAPI] = useState<any>(null);
+
   return (
-    <>
-      <App
-        appTitle={"Excalidraw with Nextjs Example"}
-        useCustom={(api: any, args?: any[]) => {}}
-        excalidrawLib={excalidrawLib}
+    <div style={{ height: "100vh", width: "100vw" }}>
+      <Excalidraw 
+        excalidrawAPI={(api) => setExcalidrawAPI(api)}
       >
-        <Excalidraw />
-      </App>
-    </>
+        <DefaultSidebar.Trigger />
+        <DefaultSidebar />
+        <GenerateSidebar excalidrawAPI={excalidrawAPI} />
+      </Excalidraw>
+    </div>
   );
 };
 
